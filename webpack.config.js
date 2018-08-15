@@ -1,6 +1,8 @@
 
 const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextWebpackPlugin=require('extract-text-webpack-plugin');
+
 
 module.exports = function () {
     return {
@@ -12,13 +14,14 @@ module.exports = function () {
         context: resolve(__dirname, 'src'),
         plugins: [
             /** Html Webpack plugin helps to create index.html file for dev server */
-            new HtmlWebpackPlugin()
+            new HtmlWebpackPlugin(),
+            new ExtractTextWebpackPlugin("myStyle.css")
         ],
         module: {
             rules: [
                 {
                     test: /\.css$/,
-                    use: ['style-loader', 'css-loader']
+                    use: ExtractTextWebpackPlugin.extract(['style-loader', 'css-loader'])
                 }
             ]
         }
