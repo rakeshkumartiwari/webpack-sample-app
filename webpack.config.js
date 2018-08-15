@@ -13,6 +13,14 @@ module.exports = function () {
         plugins: [
             /** Html Webpack plugin helps to create index.html file for dev server */
             new HtmlWebpackPlugin()
-        ]
+        ],
+        module: {
+            rules: [
+                {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader']
+                }
+            ]
+        }
     }
 }
